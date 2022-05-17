@@ -5,7 +5,6 @@ public class Game {
     private Deck deck, discardDeck;
     private Dealer dealer;
     private Player player;
-    private int wins, losses, pushes;
 
     // Game constructor
     public Game() {
@@ -23,10 +22,7 @@ public class Game {
         deck.shuffle();
         startRound();
 
-        //set scores to default
-        wins = 0;
-        losses = 0;
-        pushes = 0;
+
     }
 
     // this method will handle how each round happens
@@ -41,12 +37,9 @@ public class Game {
         int playerBet = Integer.valueOf(scanner.nextLine());
 
 
-        if (wins > 0  ||  losses > 0 || pushes > 0){
-            System.out.println();
-            System.out.println("Next round coming up...Where we stand: Wins - " +wins+ ";  Losses - " +losses+ ";  Pushes - " +pushes);
             dealer.getHand().discardHandToDeck(discardDeck);
             player.getHand().discardHandToDeck(discardDeck);
-        }
+        
 
     //check to see if playing deck has enough cards for next round
     if (deck.cardsLeft() <4){
@@ -72,15 +65,10 @@ public class Game {
             // check for player blackjact at beginning
             if (player.hasBlackjack()) {
                 System.out.println("Both of you have Blackjack (21) - Push!");
-                pushes++;
                 startRound();
             } else {
                 System.out.println("Dealer has Blackjack(21). You lose! =( ");
                 dealer.printHand();
-                losses++;
-                // Player.playerLoses(playerBet);
-                // Player.setPlayerMoney(playerMoney);
-                // System.out.println(playerMoney);
                 playerMoney -= playerBet;
                 System.out.println("Your balance is now $" + playerMoney);
                 startRound();
@@ -89,12 +77,8 @@ public class Game {
 
             if (player.hasBlackjack()) {
                 System.out.println("You have Blackjack(21). You win! =D ");
-                wins++;
                 playerMoney += playerBet;
                 System.out.println("Your balance is now $" + playerMoney);
-                // Player.playerWins(playerBet);
-                // Player.setPlayerMoney(playerMoney);
-                // System.out.println(playerMoney);
                 startRound();
             }
 
@@ -103,13 +87,8 @@ public class Game {
         //check if busted
         if (player.getHand().totalHandValue()>21){
             System.out.println("You are over 21! Busted! You lose!");
-            losses++;
             playerMoney -= playerBet;
-            System.out.println("Your balance is now $" + playerMoney);
-            // Player.playerLoses(playerBet);
-            // Player.setPlayerMoney(playerMoney);
-            // System.out.println(playerMoney);
-            
+            System.out.println("Your balance is now $" + playerMoney);            
             startRound();
         }
 
@@ -121,34 +100,24 @@ public class Game {
         //check who wins
         if(dealer.getHand().totalHandValue( )> 21){
             System.out.println("Dealer busts! You win!");
-            wins++;
             playerMoney += playerBet;
             System.out.println("Your balance is now $" + playerMoney);
-            
-            // Player.playerWins(playerBet);
-            // Player.setPlayerMoney(playerMoney);
-            // System.out.println(playerMoney);
+
 
         }else if(dealer.getHand().totalHandValue() > player.getHand().totalHandValue()){
             System.out.println("You lose!");
-            losses++;
             playerMoney -= playerBet;
             System.out.println("Your balance is now $" + playerMoney);
-            // Player.playerLoses(playerBet);
-            // Player.setPlayerMoney(playerMoney);
-            // System.out.println(playerMoney);
+
 
         }else if (dealer.getHand().totalHandValue() < player.getHand().totalHandValue()){
             System.out.println("You win!");
-            wins++;
             playerMoney += playerBet;
             System.out.println("Your balance is now $" + playerMoney);
-            // Player.playerWins(playerBet);
-            // Player.setPlayerMoney(playerMoney);
-            // System.out.println(playerMoney);
+
         }else  {
             System.out.println("PUSH!");
-            pushes++;
+            System.out.println("Your balance is $" +playerMoney);
         }
         startRound();
     }

@@ -4,6 +4,7 @@ public class Player extends Person {
 
     // static int playerMoney;
     Scanner scanner = new Scanner(System.in);
+    static int playerMoney;
 
 
     //Create new Player
@@ -12,33 +13,23 @@ public class Player extends Person {
     
     }
 
-// public static int playerMoney(){
-//     Scanner scanner = new Scanner(System.in);
-//     System.out.println("How much money would you like to add to your account?");
-//     int playerMoney = Integer.valueOf(scanner.nextLine());
-//     return playerMoney;
-// }
 
-    // public static void playerLoses(int playerBet){
-    //     playerMoney -= playerBet;
-    // }
+    public static void playerLoses(int playerBet){
+        playerMoney -= playerBet;
+    }
 
-    // public static void playerWins(int playerBet){
-    //     playerMoney += (2*playerBet);
-    // }
+    public static void playerWins(int playerBet){
+        playerMoney += (2*playerBet);
+    }
 
-    // public static void setPlayerMoney(int playerMoney) {
-    //     Player.playerMoney = playerMoney;
-    // }
+    public static void setPlayerMoney(int playerMoney) {
+        Player.playerMoney = playerMoney;
+    }
 
-    // public static int getPlayerMoney(){
-    //     return playerMoney;
-    // }
+    public static int getPlayerMoney(){
+        return playerMoney;
+    }
 
-
-    // public void printOut(){
-    //     System.out.println("Player currently has $" +playerMoney+ "left." );
-    // }
 
     public void makeDecision(Deck deck, Deck discardDeck){
         int playerDecision = 0;
